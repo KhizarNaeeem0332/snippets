@@ -1,0 +1,23 @@
+Laravel vhosts Setup on xampp
+Step: 1 First Install laravel
+Step: 2 \xampp\apache\conf\extra\httpd-vhosts.conf
+<VirtualHost *:80>
+    ServerName laravel56.local
+    DocumentRoot "E:/xampp/htdocs/laravel56/public"
+    SetEnv APPLICATION_ENV "development"
+    <Directory "E:/xampp/htdocs/laravel56/public">
+        DirectoryIndex index.php
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:80>
+   DocumentRoot "E:/xampp/htdocs"
+   ServerAlias localhost
+   ServerName localhost
+</VirtualHost>
+Step: 3 C:\Windows\System32\drivers\etc\hosts
+127.0.0.1     laravel56.local
+run laravel56.local
