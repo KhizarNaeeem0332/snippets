@@ -1,0 +1,9 @@
+#Installing vim
+#sources : http://stackoverflow.com/questions/21012203/step-by-step-instructions-for-installing-macvim
+
+
+Step 1.    Install homebrew from here: http://brew.sh
+Step 1.1.  Run export PATH=/usr/local/bin:$PATH
+Step 2.    Run brew update
+Step 3.    Run brew install vim 
+Step 4.    Run brew link macvim

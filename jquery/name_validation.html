@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Name validation</title>
+<script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <form>
+         <input type="text" name="txtName" id="txtName" placeholder="Enter Name"  required    />
+              <span style="color:red;" id="lblErrorName"></span>
+    </form>
+    
+    
+    
+<script>
+    $(document).ready(function(){
+       
+       $("#txtName").focusout(function(){
+    
+    //check empty textbox
+    var checkempty = checkEmpty("#txtName" , "#lblErrorName" , "Required: Field must be filled.");
+    if(checkempty === true)
+    {
+       var checksize =  checkSize("#txtName" , "#lblErrorName" , "Name must be greater than 3 and less than 70." , 3 , 70);
+       if(checksize === true)
+       {
+       	   checkValidName("#txtName" , "#lblErrorName" , "Name must contain only character and spaces");
+       	   
+       	    removeEndSpace("#txtName"); //trim
+       	   removeSpaceName("#txtName");//remove mulitple spaces between names
+       	   firstWordCapital("#txtName");//capatalized
+       }
+    }//check side if end    
+    
+});//txtName focusout end
+ 
+//---------------------  FUNCTIONS  STARTS ------------------------------------ //
+
+
+function displayError(controlId , errorControlId , message , errorType)
+{
+    if($.trim(errorType) == "alert"){
+        $(controlId).css("box-shadow" , "0 0 5px 3px red");
+        $(errorControlId).text(message);
+        return false;
+    }
+    if($.trim(errorType == "success")){
+        $(controlId).css("box-shadow" , "0 0 5px 3px green");
+        $(errorControlId).text("");
+    }
+}//displayError end
+
+
+function checkEmpty(textboxId , labelId , message){
+    var value = $(textboxId).val();
+    if(value == "" || value == null || !value.match(/\S/)){     
+        displayError(textboxId , labelId , message , "alert" );
+        return false;
+    }//if end
+    else
+    {
+        displayError(textboxId , labelId , message , "success" );
+        return true ;
+    }//else end
+}//checkEmpty end
+
+
+function checkSize(textboxId , labelId , message , minSize , maxSize){
+    // get texbox value
+    var value = $(textboxId).val();
+    
+    if(value.length < minSize || value.length > maxSize)
+    {
+        displayError(textboxId , labelId , message , "alert" );
+        return false;
+    }
+    else
+    {
+        displayError(textboxId , labelId , message , "success" );
+        return true;
+    }
+    
+
+}//checkSize End
+
+
+
+function checkValidName(textboxId , labelId , message){
+   var pattern = /^[a-zA-Z\s]+$/;
+   var value = $(textboxId).val(); 
+   if(value.match(pattern))  
+     {  
+     	displayError(textboxId , labelId , message , "success" );  
+        return true;   
+     }  
+   else  
+     {         
+         displayError(textboxId , labelId , message , "alert" );
+         return false;
+     } 
+
+}
+
+function checkStudentRegisterId(textboxId , labelId , message){
+	 var pattern = /[0-9]{2,2}[ntu|NTU]{3,3}[0-9]{4,4}/;
+	 var value = $.trim( $(textboxId).val() );
+	  if( value.match( pattern ) )
+	  {
+		displayError(textboxId , labelId , message , "success" );
+        return true;
+	  }
+	  else
+	  {
+          displayError(textboxId , labelId , message , "alert" );
+          return false;
+	  }
+}
+
+
+
+function removeSpaceName(textboxId) {
+	var str =  $(textboxId).val();
+	$(textboxId).val(str.replace(/\s+/g, ' '));
+}
+
+function firstWordCapital(textboxId){
+	 $(textboxId).addClass('capitalise');
+}
+
+
+function removeEndSpace(textboxId){
+	var value = $(textboxId).val();
+	$(textboxId).val($.trim(value));
+}//remove end space end
+
+function checkEmptyDropdown(dropdownId , labelId , message){
+    var value = $(dropdownId).val();
+    if(value == "" || value == null)//error
+    {
+       displayError(dropdownId , labelId , message , "alert" );
+       return false;
+    }
+    else//no error
+    {
+        displayError(dropdownId , labelId , message , "success" );
+        return true;
+    }
+}//empty dropdown end
+
+
+
+       
+    });
+    
+</script>    
+</body>
+</html>

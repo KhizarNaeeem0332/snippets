@@ -1,0 +1,11 @@
+Detailed instructions:
+
+in your ~/.bashrc add these lines:
+
+export PATH="$PATH:~/.config/composer/vendor/bin"
+Then reload:
+
+source ~/.bashrc
+Check if its added correctly:
+
+echo $PATH

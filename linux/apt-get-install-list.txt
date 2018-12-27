@@ -1,0 +1,5 @@
+sudo apt-get install
+
+composer
+vlc
+chromium-browser
